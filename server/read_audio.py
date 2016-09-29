@@ -19,7 +19,8 @@ def readAUFiles():
       #String operation to get the filename
       file_name = file_name_prefix[:-len(str(i))] + str(i)
       f = sunau.Au_read(FILE_PATH+GENRES[k]+ '/' + GENRES[k] +'.'+ file_name +'.au')
-      audio_data = np.fromstring(f.readframes(NR_FRAMES), dtype=np.int16)
+      data = np.fromstring(f.readframes(NR_FRAMES), dtype=np.int16)
+      audio_data.append(data)
 
     audio_data_dic[GENRES[k]] = audio_data
 
