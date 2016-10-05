@@ -2,10 +2,14 @@ window.onload = () => {
   const ar = new AudioRecorderManager();
   ar.ready().then(() => {
     ar.start();
-    console.log('start');
+    console.log('Start recording audio');
+    // Stop record after 1s
     setTimeout(() => {
       ar.stop();
-      console.log("blob", ar.blob);
+      console.log("Stop recoring, sending blob: ", ar.blob);
+      const fetcher = new GenreFetcher();
+      GenreFetcher.fetch(ar.blob).then(
+          res => console.log("Message from server", res));
     }, 1000);
   });
 }
