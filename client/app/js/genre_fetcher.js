@@ -1,8 +1,7 @@
 class GenreFetcher {
   static fetch(blob) {
     return fetch(GenreFetcher.API_URL, {
-             headers: {'Content-Type': 'application/octet-stream'},
-             method: "POST",
+             method: "post",
              body: blob
            })
         .then(res => res.text());
