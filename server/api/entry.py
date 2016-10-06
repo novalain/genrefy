@@ -17,6 +17,9 @@ def api_message():
     f.close()
     return "Binary message written!"
   else:
+    # request.data gives the same result as using FormData on client side
+    # and using request.files['file']
+    print request.data
     return "415 unsupported media type"
 
 if __name__ == '__main__':
