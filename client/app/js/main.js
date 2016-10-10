@@ -1,5 +1,6 @@
 window.onload = () => {
   const ar = new AudioRecorderManager();
+  const particles = new Particles();
   ar.ready().then(() => {
     ar.start();
     console.log('Start recording audio');
