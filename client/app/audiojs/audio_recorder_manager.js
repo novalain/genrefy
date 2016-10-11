@@ -32,7 +32,7 @@ var recIndex = 0;
 */
 
 function saveAudio() {
-    audioRecorder.exportWAV( doneEncoding );
+    audioRecorder.exportWAV();
     // could get mono instead by saying
     // audioRecorder.exportMonoWAV( doneEncoding );
 }
@@ -44,12 +44,12 @@ function gotBuffers( buffers ) {
 
     // the ONLY time gotBuffers is called is right after a new recording is completed - 
     // so here's where we should set up the download.
-    audioRecorder.exportWAV( doneEncoding );
+    audioRecorder.exportWAV(doneEncoding);
 }
 
 function doneEncoding( blob ) {
-   // Recorder.setupDownload( blob, "myRecording" + ((recIndex<10)?"0":"") + recIndex + ".wav" );
-    recIndex++;
+   GenreFetcher.fetch(blob).then(
+          res => console.log("Message from server", res));
 }
 
 function toggleRecording( shouldRecord ) {

@@ -51,7 +51,6 @@ this.onmessage = function(e){
 
 
 function init(config){
-  self.importScripts("../../js/genre_fetcher.js");
   self.importScripts("../../audiojs/XAudioJS/resampler.js");
   sampleRate = config.sampleRate;
 }
@@ -64,25 +63,18 @@ function record(inputBuffer){
 
 
 function exportWAV(type){
-
-
-
   var bufferL = mergeBuffers(recBuffersL, recLength);
   var bufferR = mergeBuffers(recBuffersR, recLength);
 
-  
   var resamplerL = new Resampler(44100, 22050, 1, bufferL);
   var sample = resamplerL.resampler(recLength);
   var resamplerR = new Resampler(44100, 22050, 1, bufferR);
   var sample2 = resamplerR.resampler(recLength);
   var interleaved = interleave(resamplerL.outputBuffer, resamplerR.outputBuffer);  
-  
+
   var dataview = encodeWAV(interleaved);
-
-
   var audioBlob = new Blob([dataview], { type: type });
-      GenreFetcher.fetch(audioBlob).then(
-          res => console.log("Message from server", res));
+
   this.postMessage(audioBlob);
 }
 
