@@ -1,4 +1,5 @@
 window.onload = () => {
+
   const ar = new AudioRecorderManager();
   const particles = new Particles();
   ar.ready().then(() => {
@@ -11,6 +12,6 @@ window.onload = () => {
       const fetcher = new GenreFetcher();
       GenreFetcher.fetch(ar.blob).then(
           res => console.log("Message from server", res));
-    }, 1000);
+    }, 3000);
   });
 }
