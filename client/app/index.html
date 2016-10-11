@@ -4,12 +4,34 @@
   <title>Genrefy</title>
   <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
   <link rel="stylesheet" type="text/css" href="css/style.css">
+  <script src="audiojs/XAudioJS/resampler.js"></script>
+  <script src="audiojs/recorderjs/recorderWorker.js"></script>
+  <script src="audiojs/audiodisplay.js"></script>
+  <script src="audiojs/recorderjs/recorder.js"></script>
+
+
+  <script src="audiojs/main.js"></script>
 </head>
+
 <body>
-  <h1 class='header'>All set up?</h1>
-  <div id='application' class='application'></div>
+  
+  
+
+  <!-- <div id='application' class='application'></div>
   <script src='js/genre_fetcher.js'></script>
   <script src='js/audio_recorder_manager.js'></script>
-  <script src='js/main.js'></script>
+  <script src='js/main.js'></script> -->
+  <div id="viz">
+    <canvas id="analyser" width="1024" height="500"></canvas>
+    <div id="controls">
+    <img id="record" src="img/mic128.png" onclick="toggleRecording(this);">
+    <a id="save" href="#"><img src="img/save.svg"></a>
+  </div>
+    <canvas id="wavedisplay" width="1024" height="500"></canvas>
+  </div>
+  
+
+
+
 </body>
 </html>
