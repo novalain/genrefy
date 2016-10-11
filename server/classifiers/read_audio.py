@@ -7,11 +7,10 @@ import scipy.io.wavfile as wav
 
 from python_speech_features import mfcc
 from python_speech_features import logfbank
-import sunau 
 
 #The music files contains of 22050Hz sample and 30 seconds. Which is: 30 * 22050 = 661500 frames. 
 GENRES = ["jazz", "rock", "disco", "hiphop"]
-FILE_PATH = "../dataset/genres/"
+FILE_PATH = "../../dataset/genres/"
 file_name_prefix = '00000'
 mffc_features_dic_test = {}
 mffc_features_dic_train = {}
@@ -31,7 +30,6 @@ def readAUFiles():
       mfcc_feat_resize = mfcc_feat[:sizes.shape[0], :sizes.shape[1]] 
       mfcc_feat_flat = mfcc_feat_resize.reshape(sizes.shape[0] * sizes.shape[1])
 
-      print np.array(mfcc_feat_flat[0])
       print mfcc_feat_flat.shape
       print '-------'
       

@@ -2,6 +2,7 @@ import numpy as np
 
 
 def read_mfcc_data(file,nr_train = 70, nr_test = 30,nr_categories = 4):
+  print 'Loading Data..'
   train_set = np.load(file)
   
   y_label = train_set.item().keys()
@@ -21,6 +22,7 @@ def read_mfcc_data(file,nr_train = 70, nr_test = 30,nr_categories = 4):
   index = 0
   for k in range(len(y_label)):
     genre = y_label[k]
+    print "Label Index: " , y_label.index(genre) , ', Genre: ', genre
     for i in range(nr_train):
       y_train[index] = y_label.index(genre)
       X_train[index,:] = train_set.item()[genre][i]
