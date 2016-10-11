@@ -19,12 +19,14 @@ class Particles {
 
     this.record_ = false;
     // User input
+    // TODO: This makes no sense at all to have in particles class
     this.Record = function() {
       this.record_ = !this.record_;
       if(this.record_) {
-        //this.bounce_ = false;
+        toggleRecording(true);
         this.shouldResetCtx_ = true;
       } else if (!this.record) {
+        toggleRecording(false);
         this.bounce_ = false;
         this.shouldResetCtx_ = false;
       }
