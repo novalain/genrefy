@@ -40,7 +40,7 @@ class AudioRecorderManager {
 
   listen_() {
     this.mediaRecorder_.ondataavailable = e => {
-      this.chunks_.push(e);
+      this.chunks_.push(e.data);
     }
   }
 };
