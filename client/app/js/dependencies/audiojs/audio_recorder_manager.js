@@ -21,18 +21,22 @@ var audioInput = null, realAudioInput = null, inputPoint = null,
 var rafID = null;
 var analyserContext = null;
 var canvasWidth, canvasHeight;
+// TODO: Remove global
+let serverData;
 
 function gotBuffers(buffers) {
   audioRecorder.exportWAV(doneEncoding);
 }
 
 function doneEncoding(blob) {
-  GenreFetcher.fetch(blob).then(res => console.log('Message from server', res));
+  GenreFetcher.fetch(blob, serverData)
+      .then(resultFromBackend);
 }
 
-function toggleRecording(shouldRecord) {
+function toggleRecording(shouldRecord, data) {
   if (!shouldRecord) {
     // stop recording
+    serverData = data;
     audioRecorder.stop();
     audioRecorder.getBuffers(gotBuffers);
   } else {

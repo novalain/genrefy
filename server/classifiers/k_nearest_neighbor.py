@@ -47,7 +47,7 @@ class KNearestNeighbor(object):
     return Ypred
 
 
-# X_train, y_train, X_test, y_test = mfcc_reader.read_mfcc_data('train_set.npy',nr_train = 80, nr_test = 20,nr_categories = 4);
+# X_train, y_train, X_test, y_test = mfcc_reader.read_mfcc_data('../classifiers/train_set.npy',nr_train = 80, nr_test = 20,nr_categories = 4);
 
 # k_nearest_neighbor = KNearestNeighbor()
 # k_nearest_neighbor.train(X_train, y_train)
