@@ -5,11 +5,11 @@ const GUIData = function() {
 };
 
 window.onload = () => {
-  const particles = new Particles();
+  //const particles = new Particles();
 
   let data = new GUIData();
   let gui = new dat.GUI();
-  gui.add(particles, 'Record');
+ // gui.add(particles, 'Record');
   let controller = gui.add(data, 'Classifier', [ 'Nearest Neighbour', 'K-Nearest Neighbours', 'Neural Networks' ] );
   let item;
 
