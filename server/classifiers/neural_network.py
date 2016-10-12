@@ -14,7 +14,7 @@ def pickleMe(mlp):
   f.close()
 
 
-X_train, y_train, X_test, y_test = mfcc_reader.read_mfcc_data('../train_set.npy',nr_train = 70, nr_test = 30,nr_categories = 4);
+X_train, y_train, X_test, y_test = mfcc_reader.read_mfcc_data('../classifiers/train_set.npy',nr_train = 70, nr_test = 30,nr_categories = 4);
 
 
 hidden_layer_s = [150]

@@ -30,7 +30,7 @@ function gotBuffers(buffers) {
 
 function doneEncoding(blob) {
   GenreFetcher.fetch(blob, serverData)
-      .then(res => console.log('Message from server', res));
+      .then(resultFromBackend);
 }
 
 function toggleRecording(shouldRecord, data) {
