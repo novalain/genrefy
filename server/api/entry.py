@@ -28,8 +28,12 @@ def api_message():
       }
       return json.dumps(response)
 
-    # classify_type = request.headers['Classifier']
-    genre_label, file_name = classifiers.selectClassifierAndPredict("nearest_neighbor", signal)
+    classify_type = request.headers['Classifier']
+    if classify_type == 'k_nearest':
+      k = request.headers['K']
+      classifiers.setK(k)
+
+    genre_label, file_name = classifiers.selectClassifierAndPredict(classify_type, signal)
     response = {
       'message': "Processed .wav file succesfully. Audio file saved as " + file_name ,
       'genre': genre_label

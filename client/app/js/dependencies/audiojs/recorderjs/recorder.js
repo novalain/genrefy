@@ -23,7 +23,7 @@ DEALINGS IN THE SOFTWARE.
 
 
   
-  var WORKER_PATH = 'audiojs/recorderjs/recorderWorker.js';
+  var WORKER_PATH = 'js/dependencies/audiojs/recorderjs/recorderWorker.js';
 
 
 

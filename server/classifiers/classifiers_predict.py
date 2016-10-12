@@ -3,6 +3,7 @@ import numpy as np
 from python_speech_features import mfcc
 import read_mfcc_data as mfcc_reader
 import nearest_neighbor as NN
+import k_nearest_neighbor as KNN
 import pickle
 
 
@@ -12,8 +13,15 @@ SIGNAL_LENGTH = HZ * 30
 
 genres = ['hiphop', 'jazz', 'rock', 'disco']
 
-X_train, y_train, X_test, y_test = mfcc_reader.read_mfcc_data('../classifiers/train_set.npy',nr_train = 90, nr_test = 10,nr_categories = 4);
+X_train, y_train, X_test, y_test = mfcc_reader.read_mfcc_data('../classifiers/train_set.npy',nr_train = 100, nr_test = 0,nr_categories = 4);
 
+
+k = 0
+
+def setK(theK):
+  k = theK
+def getK():
+  return k
 
 #Read saved neural net model 
 def unpickle():
@@ -26,8 +34,12 @@ def neuralNet(mfcc_features):
   return int(y_label[0])
 
 def kNearest(mfcc_features):
-
-  return ""
+  k_nearest_neighbor = KNN.NearestNeighbor()
+  k_nearest_neighbor.train(X_train, y_train)
+  k = getK()
+  print 'selected k ', k
+  y_label = k_nearest_neighbor.predict(mfcc_features,k)
+  return int(y_label[0])
 
 def nearestNeighbor(mfcc_features):
   nearest_neighbor = NN.NearestNeighbor()
@@ -38,9 +50,9 @@ def nearestNeighbor(mfcc_features):
 
 def selectClassifierAndPredict(classify_type, signal):
   the_switch = {
-      'neural_net'        : neuralNet,
-      'k_nearest'         : kNearest,
-      'nearest_neighbor' : nearestNeighbor
+      'neural_network'        : neuralNet,
+      'k_nearest'             : kNearest,
+      'nearest'               : nearestNeighbor
   }
 
   file_name ='temp_recording.wav'
@@ -53,3 +65,4 @@ def selectClassifierAndPredict(classify_type, signal):
   classify = the_switch.get(classify_type)
   label = classify(mfcc_features)
   return genres[label], file_name
+

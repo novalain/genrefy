@@ -1,6 +1,32 @@
 .title {
   font-size: 2.3em;
-  font-family: 'Allerta Stencil', sans-serif; cursive;
+  
+}
+.container{
+  max-width: 1024px;
+  position: relative;
+  margin: 0 70px;
+  overflow-x: hidden;
+  text-align: center;
+}
+h1#count-down{
+  -webkit-transition: opacity 0.3s; /* Safari */
+  transition: opacity 0.3s;
+}
+#analyser{
+  width: 1024px;
+  height: 512px;
+  padding: 0;
+  position: relative;
 }
 
-body { margin: 0px; }
+html{
+
+}
+
+body { 
+  font-family: 'Allerta Stencil', sans-serif; cursive;
+  position: relative;
+  width: 100%;
+  margin: 0px;
+}
