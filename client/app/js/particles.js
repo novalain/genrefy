@@ -11,14 +11,26 @@ class Particles {
 
     // Particles
     this.particles_ = new THREE.Geometry();
-    this.shouldResetCtx_ = true;
+    this.shouldResetCtx_ = false;
     this.scaleAccumulator_ = 1;
     this.bounce_ = true;
     this.initParticles_();
     this.render_();
 
-    // User input
     this.record_ = false;
+    // User input
+    // TODO: This makes no sense at all to have in particles class
+    this.Record = function() {
+      this.record_ = !this.record_;
+      if(this.record_) {
+        toggleRecording(true);
+        this.shouldResetCtx_ = true;
+      } else if (!this.record) {
+        toggleRecording(false);
+        this.bounce_ = false;
+        this.shouldResetCtx_ = false;
+      }
+    }
   }
 
   initParticles_() {
@@ -35,7 +47,7 @@ class Particles {
       v.z += -5;
       this.particles_.vertices.push(v);
       this.particles_.colors.push(
-          new THREE.Color(Math.random(), Math.random(), Math.random()));
+          new THREE.Color(255/255, 254/255, 198/255));
     };
 
     const pointCloud = new THREE.Points(this.particles_, material);
@@ -54,8 +66,8 @@ class Particles {
   listen_() {
     window.addEventListener('resize', this.onWindowResize_.bind(this));
     this.onWindowResize_();
-    document.getElementById('record').addEventListener(
-        "click", function() { this.record_ = !this.record_; });
+    //document.getElementById('record').addEventListener(
+      //  "click", function() { this.record_ = !this.record_; });
   }
 
   render_() {
@@ -76,19 +88,25 @@ class Particles {
 
         // Move in surface tangent direction
         particle.add(biTangent.multiplyScalar(0.005));
-        particle.multiplyScalar(Particles.SCALE_FACTOR);
+
+        if (this.record_){
+          particle.multiplyScalar(Particles.SCALE_FACTOR);
+          this.particles_.colors[index] =
+            new THREE.Color(Math.random(), Math.random(), Math.random());
+        }
         particle.z -= 5;
         // particle.add(v);
-        this.particles_.colors[index] =
-            new THREE.Color(Math.random(), Math.random(), Math.random());
+
       });
-      this.scaleAccumulator_ = Particles.SCALE_FACTOR * this.scaleAccumulator_;
+      if(this.record_) {
+        this.scaleAccumulator_ = Particles.SCALE_FACTOR * this.scaleAccumulator_;
+      }
     } else {
       this.particles_.vertices.forEach((particle, index) => {
         particle.z += 5;
         particle.multiplyScalar(1 / this.scaleAccumulator_);
         particle.z -= 5;
-        // this.particles_.colors[index] = new THREE.Color(
+      //  this.particles_.colors[index] = new THREE.Color(
         //  Math.random(), Math.random(), Math.random());
       });
       this.scaleAccumulator_ = 1;
@@ -122,12 +140,12 @@ class Particles {
 }
 
 // Constants
-Particles.NUM_PARTICLES = 1000;
+Particles.NUM_PARTICLES = 2000;
 Particles.PARTICLE_MATERIAL = new THREE.PointsMaterial({
-  color: 0xFFFFFF,
-  size: 0.11,
+  vertexColors: THREE.VertexColors,
+  size: 0.07,
   // map: THREE.ImageUtils.loadTexture("js/particle.png"),
-  blending: THREE.AdditiveBlending,
-  transparent: true
+ // blending: THREE.AdditiveBlending,
+  //transparent: true
 });
 Particles.SCALE_FACTOR = 1.003;

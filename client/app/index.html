@@ -4,46 +4,24 @@
   <title>Genrefy</title>
   <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
   <link rel="stylesheet" type="text/css" href="css/style.css">
-
   <link href="https://fonts.googleapis.com/css?family=Allerta+Stencil" rel="stylesheet">
+</head>
 
+<body>
+  <div class="title" style="position:absolute; color:white; width:100%;  text-align:center;top: 80px;">Genrefy</div>
+  <canvas style="position:absolute;" id="analyser" width="1024" height="500"></canvas>
+
+  <script src='js/three.min.js'></script>
+  <script src='js/dat.gui.min.js'></script>
+  <script src='js/particles.js'></script>
+  <script src='js/genre_fetcher.js'></script>
+  <script src='js/main.js'></script>
+
+  <!-- Dependencies -->
   <script src="audiojs/XAudioJS/resampler.js"></script>
   <script src="audiojs/recorderjs/recorderWorker.js"></script>
   <script src="audiojs/audiodisplay.js"></script>
   <script src="audiojs/recorderjs/recorder.js"></script>
-
-
-  <script src="audiojs/main.js"></script>
-
-</head>
-
-<body>
-
-<!-- 
-  <h1 class="title" style="position:absolute; color:white; left: 50%; top: 100px;">Genrefy</h1>
-  <button id="record" style="position:absolute; left: 10px; top: 50px;">Record</button>
-
-  <script src='js/three.min.js'></script>
- -->
-  
-  
-
-  <!-- <div id='application' class='application'></div>
-
-  <script src='js/genre_fetcher.js'></script>
-  <script src='js/audio_recorder_manager.js'></script>
-  <script src='js/main.js'></script> -->
-  <div id="viz">
-    <canvas id="analyser" width="1024" height="500"></canvas>
-    <div id="controls">
-    <img id="record" src="img/mic128.png" onclick="toggleRecording(this);">
-    <a id="save" href="#"><img src="img/save.svg"></a>
-  </div>
-    <canvas id="wavedisplay" width="1024" height="500"></canvas>
-  </div>
-  
-
-
-
+  <script src="audiojs/audio_recorder_manager.js"></script>
 </body>
 </html>
