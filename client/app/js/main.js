@@ -1,11 +1,11 @@
 // TODO: Put GUI and logic in separate class
 const classifiers =
-    ['Nearest Neighbour', 'K-Nearest Neighbours', 'Neural Networks'];
+    ['Nearest Neighbour', 'K-Nearest Neighbours', 'Neural Network'];
 
 // guistring -> apidata
 const convertGUItoData = new Map([
   [classifiers[0], 'nearest'], [classifiers[1], 'k_nearest'],
-  [classifiers[2], 'neural_networks']
+  [classifiers[2], 'neural_network']
 ]);
 
 let isUserRecording = false;
@@ -45,7 +45,7 @@ window.onload = () => {
 
   data.recordController = gui.add(data, 'Record');
 
-  let controller = gui.add(data, 'Classifier', [ 'Nearest Neighbour', 'K-Nearest Neighbours', 'Neural Networks' ] );
+  let controller = gui.add(data, 'Classifier', [ 'Nearest Neighbour', 'K-Nearest Neighbours', 'Neural Network' ] );
   let item;
 
   controller.onChange(value => {
