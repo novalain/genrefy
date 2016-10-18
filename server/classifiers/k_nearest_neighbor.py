@@ -57,11 +57,11 @@ class KNearestNeighbor(object):
     for x in xrange(Yte_predict.shape[0]):
       if Yte_predict[x] == y_test[x] and y_test[x] == 0.0:
         hiphopCount += 1
-      if Yte_predict[x] == y_test[x] and y_test[x] == 1.0:
+      else if Yte_predict[x] == y_test[x] and y_test[x] == 1.0:
         jazzCount += 1
-      if Yte_predict[x] == y_test[x] and y_test[x] == 2.0:
+      else if Yte_predict[x] == y_test[x] and y_test[x] == 2.0:
         rockCount += 1
-      if Yte_predict[x] == y_test[x] and y_test[x] == 3.0:
+      else if Yte_predict[x] == y_test[x] and y_test[x] == 3.0:
         discoCount += 1
 
     print hiphopCount
@@ -70,7 +70,7 @@ class KNearestNeighbor(object):
     print discoCount
 
 
-X_train, y_train, X_test, y_test = mfcc_reader.read_mfcc_data('../train_set.npy',nr_train = 70, nr_test = 30, nr_categories = 4);
+X_train, y_train, X_test, y_test = mfcc_reader.read_mfcc_data('../train_set.npy',nr_train = 90, nr_test = 10, nr_categories = 4);
 
 k_nearest_neighbor = KNearestNeighbor()
 k_nearest_neighbor.train(X_train, y_train)
