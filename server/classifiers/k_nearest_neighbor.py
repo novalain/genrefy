@@ -47,7 +47,7 @@ class KNearestNeighbor(object):
     return Ypred
 
   # prints how many correct classifications each genre has
-  def printStatistics(self, Yte_predict, y_test):
+  def printStatistics(self, Yte_predict, y_test, nr_train, nr_test):
 
     hiphopCount = 0
     jazzCount = 0
@@ -57,26 +57,28 @@ class KNearestNeighbor(object):
     for x in xrange(Yte_predict.shape[0]):
       if Yte_predict[x] == y_test[x] and y_test[x] == 0.0:
         hiphopCount += 1
-      else if Yte_predict[x] == y_test[x] and y_test[x] == 1.0:
+      elif Yte_predict[x] == y_test[x] and y_test[x] == 1.0:
         jazzCount += 1
-      else if Yte_predict[x] == y_test[x] and y_test[x] == 2.0:
+      elif Yte_predict[x] == y_test[x] and y_test[x] == 2.0:
         rockCount += 1
-      else if Yte_predict[x] == y_test[x] and y_test[x] == 3.0:
+      elif Yte_predict[x] == y_test[x] and y_test[x] == 3.0:
         discoCount += 1
 
-    print hiphopCount
-    print jazzCount
-    print rockCount
-    print discoCount
+    print "hiphop correct:", hiphopCount/float(nr_test)*(nr_test+nr_train), "%"
+    print "jazz correct: ", jazzCount/float(nr_test)*(nr_test+nr_train), "%"
+    print "rock correct: ", rockCount/float(nr_test)*(nr_test+nr_train), "%"
+    print "disco correct: ", discoCount/float(nr_test)*(nr_test+nr_train), "%"
 
-
-X_train, y_train, X_test, y_test = mfcc_reader.read_mfcc_data('../train_set.npy',nr_train = 90, nr_test = 10, nr_categories = 4);
+nr_train = 90
+nr_test = 10
+nr_categories = 4
+X_train, y_train, X_test, y_test = mfcc_reader.read_mfcc_data('../train_set.npy',nr_train, nr_test, nr_categories);
 
 k_nearest_neighbor = KNearestNeighbor()
 k_nearest_neighbor.train(X_train, y_train)
 Yte_predict = k_nearest_neighbor.predict(X_test)
 
-k_nearest_neighbor.printStatistics(Yte_predict, y_test)
+k_nearest_neighbor.printStatistics(Yte_predict, y_test, nr_train, nr_test)
 
 print 'accuracy: %f' % ( np.mean(Yte_predict == y_test) )
 
