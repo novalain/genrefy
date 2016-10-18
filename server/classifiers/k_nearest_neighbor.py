@@ -12,7 +12,7 @@ class KNearestNeighbor(object):
     self.Xtr = X
     self.ytr = y
 
-  def predict(self, X, k = 7):
+  def predict(self, X, k = 8):
     """ X is N x D where each row is an example we wish to predict label for """
     num_test = X.shape[0]
     # lets make sure that the output type matches the input type
@@ -46,11 +46,38 @@ class KNearestNeighbor(object):
 
     return Ypred
 
+  # prints how many correct classifications each genre has
+  def printStatistics(self, Yte_predict, y_test):
 
-# X_train, y_train, X_test, y_test = mfcc_reader.read_mfcc_data('../classifiers/train_set.npy',nr_train = 80, nr_test = 20,nr_categories = 4);
+    hiphopCount = 0
+    jazzCount = 0
+    rockCount = 0
+    discoCount = 0
 
-# k_nearest_neighbor = KNearestNeighbor()
-# k_nearest_neighbor.train(X_train, y_train)
-# Yte_predict = k_nearest_neighbor.predict(X_test)
+    for x in xrange(Yte_predict.shape[0]):
+      if Yte_predict[x] == y_test[x] and y_test[x] == 0.0:
+        hiphopCount += 1
+      else if Yte_predict[x] == y_test[x] and y_test[x] == 1.0:
+        jazzCount += 1
+      else if Yte_predict[x] == y_test[x] and y_test[x] == 2.0:
+        rockCount += 1
+      else if Yte_predict[x] == y_test[x] and y_test[x] == 3.0:
+        discoCount += 1
 
-# print 'accuracy: %f' % ( np.mean(Yte_predict == y_test) )
+    print hiphopCount
+    print jazzCount
+    print rockCount
+    print discoCount
+
+
+X_train, y_train, X_test, y_test = mfcc_reader.read_mfcc_data('../train_set.npy',nr_train = 90, nr_test = 10, nr_categories = 4);
+
+k_nearest_neighbor = KNearestNeighbor()
+k_nearest_neighbor.train(X_train, y_train)
+Yte_predict = k_nearest_neighbor.predict(X_test)
+
+k_nearest_neighbor.printStatistics(Yte_predict, y_test)
+
+print 'accuracy: %f' % ( np.mean(Yte_predict == y_test) )
+
+
